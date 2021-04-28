@@ -601,7 +601,19 @@ class FileSaveForm(FileFormBase):
                 )
                 if not name and not name_is_optional:
                     # lets populate name with a default value:
-                    name = self._current_env.save_as_default_name or "scene"
+                    project = self._current_env.context.project['name']
+                    fields = self._current_env.context.as_template_fields(self._current_env.work_template)
+                    asset = fields.get("Asset")
+                    assettype = fields.get("sg_asset_type")
+                    step = fields.get("Step")
+
+                    name = "{}_{}_{}_000_{}".format(
+                                                    project.replace(" ", "").title(),
+                                                    assettype.title(),
+                                                    asset.title(),
+                                                    step.title()
+                                                   )
+                    #name = self._current_env.save_as_default_name or "scene"
                 self._ui.name_edit.setText(name)
 
             self._ui.name_label.setVisible(name_is_used)
