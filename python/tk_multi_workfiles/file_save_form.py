@@ -352,7 +352,33 @@ class FileSaveForm(FileFormBase):
         name_is_used = "name" in env.work_template.keys
         if name_is_used:
             if not env.work_template.is_optional("name") and not name:
-                raise TankError("Name is required, please enter a valid name!")
+                project = self._current_env.context.project['name']
+                fields = self._current_env.context.as_template_fields(self._current_env.work_template)
+                asset = fields.get("Asset")
+                assettype = fields.get("sg_asset_type")
+                episode = fields.get("Episode")
+                sequence = fields.get("Sequence")
+                shot = fields.get("Shot")
+                step = fields.get("Step")
+
+                # Asset type is set = it is an asset
+                if assettype:
+                    name = "{}_{}_{}_000_{}".format(
+                                                    project.replace(" ", "").title(),
+                                                    assettype.title(),
+                                                    asset.title(),
+                                                    step.title()
+                                                   )
+                # Shot
+                else:
+                    name = "{}_{}_{}_{}_{}".format(
+                                                    project.replace(" ", "").title(),
+                                                    episode.title(),
+                                                    sequence.title(),
+                                                    shot.title(),
+                                                    step.title()
+                                                    )
+
             if name:
                 if not env.work_template.keys["name"].validate(name):
                     raise TankError("Name contains illegal characters!")
@@ -601,7 +627,33 @@ class FileSaveForm(FileFormBase):
                 )
                 if not name and not name_is_optional:
                     # lets populate name with a default value:
-                    name = self._current_env.save_as_default_name or "scene"
+                    project = self._current_env.context.project['name']
+                    fields = self._current_env.context.as_template_fields(self._current_env.work_template)
+                    asset = fields.get("Asset")
+                    assettype = fields.get("sg_asset_type")
+                    episode = fields.get("Episode")
+                    sequence = fields.get("Sequence")
+                    shot = fields.get("Shot")
+                    step = fields.get("Step")
+
+                    # Asset type set = it is an asset
+                    if assettype:
+                        name = "{}_{}_{}_000_{}".format(
+                                                        project.replace(" ", "").title(),
+                                                        assettype.title(),
+                                                        asset.title(),
+                                                        step.title()
+                                                    )
+                    # Shot
+                    else:
+                        name = "{}_{}_{}_{}_{}".format(
+                                                        project.replace(" ", "").title(),
+                                                        episode.title(),
+                                                        sequence.title(),
+                                                        shot.title(),
+                                                        step.title()
+                                                        )
+                    #name = self._current_env.save_as_default_name or "scene"
                 self._ui.name_edit.setText(name)
 
             self._ui.name_label.setVisible(name_is_used)
