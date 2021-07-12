@@ -364,19 +364,19 @@ class FileSaveForm(FileFormBase):
                 # Asset type is set = it is an asset
                 if assettype:
                     name = "{}_{}_{}_000_{}".format(
-                                                    project.replace(" ", "").title(),
-                                                    assettype.title(),
-                                                    asset.title(),
-                                                    step.title()
+                                                    project.replace(" ", ""),
+                                                    assettype,
+                                                    asset,
+                                                    step
                                                    )
                 # Shot
                 else:
                     name = "{}_{}_{}_{}_{}".format(
-                                                    project.replace(" ", "").title(),
-                                                    episode.title(),
-                                                    sequence.title(),
-                                                    shot.title(),
-                                                    step.title()
+                                                    project.replace(" ", ""),
+                                                    episode,
+                                                    sequence,
+                                                    shot,
+                                                    step
                                                     )
 
             if name:
@@ -639,20 +639,20 @@ class FileSaveForm(FileFormBase):
                     # Asset type set = it is an asset
                     if assettype:
                         name = "{}_{}_{}_000_{}".format(
-                                                        project.replace(" ", "").title(),
-                                                        assettype.title(),
-                                                        asset.title(),
-                                                        step.title()
+                                                        project.replace(" ", ""),
+                                                        assettype,
+                                                        asset,
+                                                        step
                                                     )
                     # Shot
                     else:
                         name = "{}_{}_{}_{}_{}".format(
-                                                        project.replace(" ", "").title(),
-                                                        episode.title(),
-                                                        sequence.title(),
-                                                        shot.title(),
-                                                        step.title()
-                                                        )
+                                                        project.replace(" ", ""),
+                                                        episode,
+                                                        sequence,
+                                                        shot,
+                                                        step
+                                                    )
                     #name = self._current_env.save_as_default_name or "scene"
                 self._ui.name_edit.setText(name)
 
