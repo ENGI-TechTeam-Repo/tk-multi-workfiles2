@@ -363,7 +363,7 @@ class FileSaveForm(FileFormBase):
 
                 # Asset type is set = it is an asset
                 if assettype:
-                    name = "{}_{}_{}_000_{}".format(
+                    name = "{}_{}_{}_{}_000".format(
                                                     project.replace(" ", ""),
                                                     assettype,
                                                     asset,
@@ -638,7 +638,7 @@ class FileSaveForm(FileFormBase):
 
                     # Asset type set = it is an asset
                     if assettype:
-                        name = "{}_{}_{}_000_{}".format(
+                        name = "{}_{}_{}_{}_000".format(
                                                         project.replace(" ", ""),
                                                         assettype,
                                                         asset,
